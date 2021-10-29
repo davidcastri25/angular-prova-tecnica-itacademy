@@ -1,1 +1,116 @@
-<p>form works!</p>
+<!-- Título -->
+<h2 class="text-center">Formulari</h2>
+
+<!-- Jumbotron -->
+<div class="jumbotron p-4 mb-4">                   
+    <p class="texto text-center">Introdueix l'amplada i l'alçada del camp on aterritzarà el Rover.</p>
+    <p class="texto text-center">Introdueix també les coordinades inicials del Rover (x, y), l'orientació inicial (nord , sud, est, oest), i els comandaments per moure el Rover.</p>
+    <p class="texto text-center">El Rover podrà avançar, girar la seva actual orientació cap a l'esquerra o cap a la dreta</p>        
+</div>
+
+<!-- Formulario -->
+<form>
+
+    <!-- Campo -->
+    <h4>Camp</h4>    
+    <div class="form-group mb-3 row">
+        <!-- Ancho campo formControlName="width"-->
+        <div class="col-6">
+            <label for="width">Amplada (eix X)</label>
+            <input 
+                class="form-control" 
+                id="width" 
+                type="text" 
+                placeholder="Ex: 10"
+                
+                />        
+            <div class="invalid-feedback">
+                El camp és obligatori.
+            </div>
+        </div>
+        <!-- Alto campo formControlName="height"-->
+        <div class="col-6">
+            <label for="height">Alçada (eix Y)</label>
+            <input 
+                class="form-control" 
+                id="height" 
+                type="text" 
+                placeholder="Ex: 10"
+                
+                />        
+            <div class="invalid-feedback">
+                El camp és obligatori.
+            </div>
+        </div>      
+    </div>
+
+    <!-- Rover -->
+    <h4 class="mt-4">Rover</h4>
+    <div class="form-group mb-3 row">
+        <!-- Coordenada X formControlName="x"-->
+        <div class="col-6">
+            <label for="x">Coordenada inicial X</label>
+            <input 
+                class="form-control" 
+                id="x" 
+                type="text" 
+                placeholder="Ex: 5"
+                
+                />        
+            <div class="invalid-feedback">
+                El camp és obligatori.
+            </div>
+        </div>
+        <!-- Coordenada Y formControlName="y"-->
+        <div class="col-6">
+            <label for="y">Coordenada inicial Y</label>
+            <input 
+                class="form-control" 
+                id="y" 
+                type="text" 
+                placeholder="Ex: 5"
+                
+                />        
+            <div class="invalid-feedback">
+                El camp és obligatori.
+            </div>
+        </div>      
+    </div>
+    <!-- Orientació inicial formControlName="orientation"-->
+    <div class="form-group mb-3">
+        <label for="orientation">Orientació inicial</label>
+        <select class="form-select" id="orientation" >
+            <option selected>Escolleix...</option>
+            <option value="N">Nord</option>
+            <option value="S">Sud</option>
+            <option value="E">Est</option>
+            <option value="W">Oest</option>
+        </select>
+        <div class="invalid-feedback">
+                El camp és obligatori.
+        </div>
+    </div>
+    <!-- Comandaments formControlName="commands"-->
+    <div class="form-group mb-4">
+        <label for="commands">Comandaments</label>
+        <div class="input-group">
+            <select class="form-select" id="commands" >
+                <option selected>Escolleix...</option>
+                <option value="A">Avançar</option>
+                <option value="L">Girar-se a l'esquerra</option>
+                <option value="R">Girar-se a la dreta</option>            
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Afegir comandament</button>
+            </div>
+        </div>        
+        <div class="invalid-feedback">
+                El camp és obligatori.
+        </div>
+    </div>
+
+    <!-- Submit Button-->
+    <div class="d-flex">
+        <button class="btn btn-primary flex-grow-1" id="submitButton" type="submit">Aterritzar!</button>
+    </div>
+</form>
