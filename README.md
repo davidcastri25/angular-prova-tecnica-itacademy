@@ -18,3 +18,6 @@ El programa debe validar si todas las órdenes pueden ser ejecutadas dentro del 
 Debe devolver también la orientación y coordenadas finales del Rover.
 
 La solución debe ser ejecutada en una única instrucción npm.
+
+# Node version
+16.3.0
