@@ -1,27 +1,20 @@
-# AngularProvaTecnicaItacademy
+# Prueba técnica de IT Academy - BarcelonaActiva
+Se necesita un programa que valide las instrucciones que serán utilizadas por un Rover en Marte.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+Un Rover ocupa un cuadrado y puede recibir las siguientes ordenes A (Avanzar), L (Izquierda), R (Derecha).
 
-## Development server
+El programa tiene que validar que el Rover queda dentro del cuadrado y debe indicarnos su orientación final (N, S, E, W).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+El programa recibirá las dimensiones del cuadrado (anchura y altura) y se asume que las coordenadas (0, 0) indican la esquina de abajo a la izquierda.
 
-## Code scaffolding
+Adicionalmente recibirá las coordenadas del rover y su orientacion inicial (N, S, E, W).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+También recibirá un conjunto de órdenes, por ejemplo 'AALAARALA'. No hay límite de órdenes, se puede introducir 1 o 40 o 100 o 1000.
 
-## Build
+Se asume que no hay ningún obstáculo dentro del cuadro.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+El programa debe validar si todas las órdenes pueden ser ejecutadas dentro del cuadrado y debe devolver true or false en función de si los comandos son válidos.
 
-## Running unit tests
+Debe devolver también la orientación y coordenadas finales del Rover.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+La solución debe ser ejecutada en una única instrucción npm.
