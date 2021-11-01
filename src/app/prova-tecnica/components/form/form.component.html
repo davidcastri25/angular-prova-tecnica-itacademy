@@ -3,8 +3,8 @@
 
 <!-- Jumbotron -->
 <div class="jumbotron p-4 mb-4">                   
-    <p class="texto text-center">Introdueix l'amplada i l'alçada del camp on aterritzarà el Rover.</p>
-    <p class="texto text-center">Introdueix també les coordinades inicials del Rover (x, y), l'orientació inicial (nord , sud, est, oest), i els comandaments per moure el Rover.</p>
+    <p class="texto text-center">Introdueix l'amplada i l'alçada del camp (valors numèrics enters més grans que 0) on aterritzarà el Rover.</p>
+    <p class="texto text-center">Introdueix també les coordinades inicials del Rover (x, y) (seran valors numèrics enters), l'orientació inicial (nord , sud, est, oest), i els comandaments per moure el Rover.</p>
     <p class="texto text-center">El Rover podrà avançar, girar la seva actual orientació cap a l'esquerra o cap a la dreta</p>        
 </div>
 
@@ -26,11 +26,21 @@
                 placeholder="Ex: 10"
                 formControlName="width"
                 [ngClass]="{'is-invalid': validateNumberFields('width')}"
-                />        
+                />
             <div class="invalid-feedback"
-                *ngIf="validateNumberFields('width')">
+                *ngIf="initialForm.controls.width.hasError('required')"> <!-- Se mostrará si no se ha introducido ningún valor -->
                 El camp és obligatori.
             </div>
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.width.hasError('min')"> <!-- Se mostrará si el valor introducido no cumple con el Validator.min -->
+                El valor ha de ser com a mínim 1.
+            </div>  
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.width.value % 1 != 0"
+                > <!-- Se mostrará si el valor tiene decimales -->
+                El valor ha de ser un número enter.
+            </div>        
+                       
         </div>
         <!-- Alto campo -->
         <div class="col-6">
@@ -44,8 +54,17 @@
                 [ngClass]="{'is-invalid': validateNumberFields('height')}"
                 />        
             <div class="invalid-feedback"
-                *ngIf="validateNumberFields('height')">
+                *ngIf="initialForm.controls.height.hasError('required')"> <!-- Se mostrará si no se ha introducido ningún valor -->
                 El camp és obligatori.
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.height.hasError('min')"> <!-- Se mostrará si el valor introducido no cumple con el Validator.min -->
+                El valor ha de ser com a mínim 1.
+            </div>  
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.height.value % 1 != 0"
+                > <!-- Se mostrará si el valor tiene decimales -->
+                El valor ha de ser un número enter.
             </div>
         </div>      
     </div>
@@ -65,8 +84,17 @@
                 [ngClass]="{'is-invalid': validateNumberFields('x')}"
                 />        
             <div class="invalid-feedback"
-                *ngIf="validateNumberFields('x')">
+                *ngIf="initialForm.controls.x.hasError('required')"> <!-- Se mostrará si no se ha introducido ningún valor -->
                 El camp és obligatori.
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.x.hasError('min')"> <!-- Se mostrará si el valor introducido no cumple con el Validator.min -->
+                El valor ha de ser com a mínim 0.
+            </div>  
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.x.value % 1 != 0"
+                > <!-- Se mostrará si el valor tiene decimales -->
+                El valor ha de ser un número enter.
             </div>
         </div>
         <!-- Coordenada Y -->
@@ -81,16 +109,29 @@
                 [ngClass]="{'is-invalid': validateNumberFields('y')}"
                 />        
             <div class="invalid-feedback"
-                *ngIf="validateNumberFields('y')">
+                *ngIf="initialForm.controls.y.hasError('required')"> <!-- Se mostrará si no se ha introducido ningún valor -->
                 El camp és obligatori.
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.y.hasError('min')"> <!-- Se mostrará si el valor introducido no cumple con el Validator.min -->
+                El valor ha de ser com a mínim 0.
+            </div>  
+            <div class="invalid-feedback"
+                *ngIf="initialForm.controls.y.value % 1 != 0"
+                > <!-- Se mostrará si el valor tiene decimales -->
+                El valor ha de ser un número enter.
             </div>
         </div>      
     </div>
-    <!-- Orientació inicial formControlName="orientation"-->
+    <!-- Orientació inicial -->
     <div class="form-group mb-3">
         <label for="orientation">Orientació inicial</label>
-        <select class="form-select" id="orientation" >
-            <option selected>Escolleix...</option>
+        <select 
+            class="form-select" 
+            id="orientation"
+            formControlName="orientation"
+            [ngClass]="{'is-invalid': validateSelectFields('orientation')}">
+            <option selected disabled value="">Escolleix...</option>
             <option value="N">Nord (N)</option>
             <option value="S">Sud (S)</option>
             <option value="E">Est (E)</option>
@@ -100,12 +141,16 @@
                 El camp és obligatori.
         </div>
     </div>
-    <!-- Comandaments formControlName="commands"-->
+    <!-- Comandaments -->
     <div class="form-group mb-4">
         <label for="commands">Comandaments</label>
         <div class="input-group">
-            <select class="form-select" id="commands" >
-                <option selected>Escolleix...</option>
+            <select 
+                class="form-select" 
+                id="commands"
+                formControlName="commands"
+                [ngClass]="{'is-invalid': validateSelectFields('commands')}" >
+                <option selected disabled value="">Escolleix...</option>
                 <option value="A">Avançar (A)</option>
                 <option value="L">Girar-se a l'esquerra (L)</option>
                 <option value="R">Girar-se a la dreta (R)</option>            
@@ -113,10 +158,10 @@
             <div class="input-group-append">
                 <button class="btn btn-outline-success" type="button">Afegir comandament</button>
             </div>
+            <div class="invalid-feedback">
+                    El camp és obligatori.
+            </div>
         </div>        
-        <div class="invalid-feedback">
-                El camp és obligatori.
-        </div>
     </div>
 
     <!-- Submit Button-->

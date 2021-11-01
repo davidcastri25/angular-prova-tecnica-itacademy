@@ -13,7 +13,8 @@ export class FormComponent implements OnInit {
     height: [, [Validators.required, Validators.min(1)]],
     x: [, [Validators.required, Validators.min(0)]], //Aquí sí permito el 0, porque la coordenada (0, 0) existirá
     y: [, [Validators.required, Validators.min(0)]],
-
+    orientation: ['', Validators.required], //Aquí me interesa que el valor por defecto sea un string vacío, ya que así aparecerá Escolleix tipo placeholder
+    commands: ['', Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder) { }
@@ -31,6 +32,10 @@ export class FormComponent implements OnInit {
     }  
   }
 
+  validateSelectFields(field:string) {
+    return this.initialForm.controls[field].errors && this.initialForm.controls[field].touched;
+  }
+
   /* Método que lanzará el botón submit del formulario */
   startLanding() {
 
@@ -45,7 +50,14 @@ export class FormComponent implements OnInit {
       console.log(this.initialForm.value);
 
       //Reseteamos el formulario
-      this.initialForm.reset();
+      this.initialForm.reset({
+        width: null,
+        height: null,
+        x: null,
+        y: null,
+        orientation: '',
+        commands: ''
+      });
 
       //Navegamos a la página de output 
     }
