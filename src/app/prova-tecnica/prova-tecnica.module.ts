@@ -21,7 +21,7 @@ import { AppRoutingModule } from '../app-routing.module';
   imports: [
     CommonModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule //Para usar reactive forms
   ]
 })
 export class ProvaTecnicaModule { }

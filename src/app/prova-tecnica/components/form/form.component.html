@@ -9,36 +9,42 @@
 </div>
 
 <!-- Formulario -->
-<form>
+<form 
+    [formGroup]="initialForm"
+    (ngSubmit)="startLanding()">
 
     <!-- Campo -->
     <h4>Camp</h4>    
     <div class="form-group mb-3 row">
-        <!-- Ancho campo formControlName="width"-->
+        <!-- Ancho campo -->
         <div class="col-6">
             <label for="width">Amplada (eix X)</label>
             <input 
                 class="form-control" 
                 id="width" 
-                type="text" 
+                type="number" 
                 placeholder="Ex: 10"
-                
+                formControlName="width"
+                [ngClass]="{'is-invalid': validateNumberFields('width')}"
                 />        
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"
+                *ngIf="validateNumberFields('width')">
                 El camp és obligatori.
             </div>
         </div>
-        <!-- Alto campo formControlName="height"-->
+        <!-- Alto campo -->
         <div class="col-6">
             <label for="height">Alçada (eix Y)</label>
             <input 
                 class="form-control" 
                 id="height" 
-                type="text" 
+                type="number" 
                 placeholder="Ex: 10"
-                
+                formControlName="height"
+                [ngClass]="{'is-invalid': validateNumberFields('height')}"
                 />        
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"
+                *ngIf="validateNumberFields('height')">
                 El camp és obligatori.
             </div>
         </div>      
@@ -47,31 +53,35 @@
     <!-- Rover -->
     <h4 class="mt-4">Rover</h4>
     <div class="form-group mb-3 row">
-        <!-- Coordenada X formControlName="x"-->
+        <!-- Coordenada X -->
         <div class="col-6">
             <label for="x">Coordenada inicial X</label>
             <input 
                 class="form-control" 
                 id="x" 
-                type="text" 
+                type="number" 
                 placeholder="Ex: 5"
-                
+                formControlName="x"
+                [ngClass]="{'is-invalid': validateNumberFields('x')}"
                 />        
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"
+                *ngIf="validateNumberFields('x')">
                 El camp és obligatori.
             </div>
         </div>
-        <!-- Coordenada Y formControlName="y"-->
+        <!-- Coordenada Y -->
         <div class="col-6">
             <label for="y">Coordenada inicial Y</label>
             <input 
                 class="form-control" 
                 id="y" 
-                type="text" 
+                type="number" 
                 placeholder="Ex: 5"
-                
+                formControlName="y"
+                [ngClass]="{'is-invalid': validateNumberFields('y')}"
                 />        
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"
+                *ngIf="validateNumberFields('y')">
                 El camp és obligatori.
             </div>
         </div>      
@@ -81,10 +91,10 @@
         <label for="orientation">Orientació inicial</label>
         <select class="form-select" id="orientation" >
             <option selected>Escolleix...</option>
-            <option value="N">Nord</option>
-            <option value="S">Sud</option>
-            <option value="E">Est</option>
-            <option value="W">Oest</option>
+            <option value="N">Nord (N)</option>
+            <option value="S">Sud (S)</option>
+            <option value="E">Est (E)</option>
+            <option value="W">Oest (W)</option>
         </select>
         <div class="invalid-feedback">
                 El camp és obligatori.
@@ -96,12 +106,12 @@
         <div class="input-group">
             <select class="form-select" id="commands" >
                 <option selected>Escolleix...</option>
-                <option value="A">Avançar</option>
-                <option value="L">Girar-se a l'esquerra</option>
-                <option value="R">Girar-se a la dreta</option>            
+                <option value="A">Avançar (A)</option>
+                <option value="L">Girar-se a l'esquerra (L)</option>
+                <option value="R">Girar-se a la dreta (R)</option>            
             </select>
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Afegir comandament</button>
+                <button class="btn btn-outline-success" type="button">Afegir comandament</button>
             </div>
         </div>        
         <div class="invalid-feedback">
@@ -111,6 +121,9 @@
 
     <!-- Submit Button-->
     <div class="d-flex">
-        <button class="btn btn-primary flex-grow-1" id="submitButton" type="submit">Aterritzar!</button>
+        <button 
+            class="btn btn-primary flex-grow-1" 
+            id="submitButton" 
+            type="submit">Aterritzar!</button>
     </div>
 </form>
