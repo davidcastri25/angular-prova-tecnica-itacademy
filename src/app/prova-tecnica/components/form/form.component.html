@@ -144,12 +144,11 @@
     <!-- Comandaments -->
     <div class="form-group mb-4">
         <label for="commands">Comandaments</label>
-        <div class="input-group">
+        <div class="input-group mb-3">
             <select 
                 class="form-select" 
-                id="commands"
-                formControlName="commands"
-                [ngClass]="{'is-invalid': validateSelectFields('commands')}" >
+                id="commands"                
+                [ngClass]="{'is-invalid': commandsArr.length == 0 && this.initialForm.controls.commands.touched}" > <!-- Si el array de formcontrols está vacío y le hemos hecho touched -->
                 <option selected disabled value="">Escolleix...</option>
                 <option value="A">Avançar (A)</option>
                 <option value="L">Girar-se a l'esquerra (L)</option>
@@ -158,10 +157,26 @@
             <div class="input-group-append">
                 <button class="btn btn-outline-success" type="button">Afegir comandament</button>
             </div>
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"
+                *ngIf="commandsArr.length == 0"> <!-- Si el array de formcontrols está vacío -->
                     El camp és obligatori.
             </div>
+        </div> 
+        
+        <!-- Lista de órdenes -->
+        <div formArrayName="commands">
+            <div class="input-group mb-1"
+            *ngFor="let command of commandsArr.controls; let i = index"> <!-- Vuelvo a poner controls porque commands es un formgroup -->
+                <input class="form-control"
+                    [formControlName]="i">
+
+                <button 
+                    type="button"
+                    class="btn btn-outline-danger">Eliminar</button>
+
+            </div>
         </div>        
+                      
     </div>
 
     <!-- Submit Button-->

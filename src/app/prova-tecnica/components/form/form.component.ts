@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -14,13 +14,24 @@ export class FormComponent implements OnInit {
     x: [, [Validators.required, Validators.min(0)]], //Aquí sí permito el 0, porque la coordenada (0, 0) existirá
     y: [, [Validators.required, Validators.min(0)]],
     orientation: ['', Validators.required], //Aquí me interesa que el valor por defecto sea un string vacío, ya que así aparecerá Escolleix tipo placeholder
-    commands: ['', Validators.required]
+    // commands: ['', Validators.required]
+    commands: this.formBuilder.array( [//Es un array de form controls, NO es un array de arrays 
+      ['A'],
+      ['A']
+    ], Validators.required) // Tiene que haber al menos una orden
   });
+
+  /* GETTER: nos devolverá el array de formcontrols commands */
+  get commandsArr() {
+    return this.initialForm.get('commands') as FormArray;
+  }
+
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
+  
 
   /* Método para no llenar tanto el template y hacer la validación de forma más dinámica. Retornarà true si el número es decimal o si hay errores y el input ha sido tocado */
   validateNumberFields(field: string) {
