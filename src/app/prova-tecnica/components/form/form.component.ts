@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -20,6 +20,9 @@ export class FormComponent implements OnInit {
       ['A']
     ], Validators.required) // Tiene que haber al menos una orden
   });
+
+  /* Control a part per poder afegir commands */
+  newCommand: FormControl = this.formBuilder.control('');
 
   /* GETTER: nos devolverá el array de formcontrols commands */
   get commandsArr() {
@@ -45,6 +48,17 @@ export class FormComponent implements OnInit {
 
   validateSelectFields(field:string) {
     return this.initialForm.controls[field].errors && this.initialForm.controls[field].touched;
+  }
+
+  /* Método para añadir nueva command */
+  addCommand() {
+    if (this.newCommand.invalid) {
+      return;
+    }
+    else {
+      //Cogemos el control commands de nuestro initialForm (mediante el getter) y hacemos push de un nuevo formcontrol
+      this.commandsArr.push(this.formBuilder.control(this.newCommand.value, Validators.required)); //Required porque si borramos el valor luego nos debe seguir saliendo error
+    }
   }
 
   /* Método que lanzará el botón submit del formulario */

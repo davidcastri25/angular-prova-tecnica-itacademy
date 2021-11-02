@@ -149,7 +149,8 @@
             
             <select 
                 class="form-select" 
-                id="commands"                
+                id="commands"
+                [formControl]="newCommand"                
                 [ngClass]="{'is-invalid': commandsArr.length == 0 && this.initialForm.controls.commands.touched}" > <!-- Si el array de formcontrols está vacío y le hemos hecho touched -->
                 <option selected disabled value="">Escolleix...</option>
                 <option value="A">Avançar (A)</option>
@@ -157,7 +158,10 @@
                 <option value="R">Girar-se a la dreta (R)</option>            
             </select> 
 
-            <button class="btn btn-outline-success" type="button">Afegir comandament</button>
+            <button 
+                class="btn btn-outline-success" 
+                type="button"
+                (click)="addCommand()">Afegir comandament</button> <!-- Cuando hacemos click llamamos a addCommand() -->
             
             <div class="invalid-feedback"
                 *ngIf="commandsArr.length == 0"> <!-- Si el array de formcontrols está vacío -->
@@ -170,11 +174,18 @@
             <div class="input-group mb-1"
             *ngFor="let command of commandsArr.controls; let i = index"> <!-- Vuelvo a poner controls porque commands es un formgroup -->
                 <span class="input-group-text">{{ i + 1 }}</span>
+
                 <input class="form-control"
                     [formControlName]="i">
+
                 <button 
                     type="button"
                     class="btn btn-outline-danger">Eliminar</button>
+
+                <!--<div class="invalid-feedback"
+                    *ngIf="commandsArr.controls[i].value == null">
+                        El camp és obligatori.
+                </div>  -->
             </div>
         </div>        
                       
