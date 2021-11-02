@@ -11,6 +11,7 @@ export interface Rover {
     finalPosition?: RoverPosition;
     finalOrientation?: 'N' | 'S' | 'E' | 'W';
     validCommands?: boolean;
+    commands?: string[];
 }
 
 /* Interfaz para la posición del rover */

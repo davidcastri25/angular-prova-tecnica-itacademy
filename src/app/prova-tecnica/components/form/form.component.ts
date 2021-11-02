@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +32,11 @@ export class FormComponent implements OnInit {
   }
 
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: DataService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -75,8 +82,8 @@ export class FormComponent implements OnInit {
     }
     //Si el formulario SÍ es válido
     else {
-      //Guardamos todos los datos
-      console.log(this.initialForm.value);
+      //Guardamos todos los datos en el servicio
+      this.dataService.passData(this.initialForm.value);
 
       //Reseteamos el formulario
       this.initialForm.reset({
@@ -90,7 +97,8 @@ export class FormComponent implements OnInit {
       this.newCommand.reset(''); //Reseteamos el campo newcommand
       this.commandsArr.controls = []; //Reseteamos el array
 
-      //Navegamos a la página de output 
+      //Navegamos a la página de output
+      this.router.navigate(["/output"]);
     }
 
   }
