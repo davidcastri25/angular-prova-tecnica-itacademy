@@ -18,6 +18,5 @@ export let rover: Rover = {
         y: 0
     },
     finalOrientation: 'N',
-    validCommands: true,
     commands: ['']
 }

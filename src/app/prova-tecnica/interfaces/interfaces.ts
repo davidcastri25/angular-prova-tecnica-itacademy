@@ -10,7 +10,6 @@ export interface Rover {
     initialOrientation: 'N' | 'S' | 'E' | 'W';
     finalPosition?: RoverPosition;
     finalOrientation?: 'N' | 'S' | 'E' | 'W';
-    validCommands?: boolean;
     commands?: string[];
 }
 
