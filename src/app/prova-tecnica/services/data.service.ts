@@ -33,5 +33,8 @@ export class DataService {
       y: this.formValues.y
     }
     rover.initialOrientation = this.formValues.orientation;
+
+    console.log(field);
+    console.log(rover);
   }
 }
