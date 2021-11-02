@@ -176,16 +176,14 @@
                 <span class="input-group-text">{{ i + 1 }}</span>
 
                 <input class="form-control"
-                    [formControlName]="i">
-
+                    type="text"
+                    [formControlName]="i">                
+                
                 <button 
                     type="button"
-                    class="btn btn-outline-danger">Eliminar</button>
-
-                <!--<div class="invalid-feedback"
-                    *ngIf="commandsArr.controls[i].value == null">
-                        El camp és obligatori.
-                </div>  -->
+                    class="btn btn-outline-danger"
+                    (click)="deleteCommand(i)">Eliminar</button> <!-- Llama al método para borrar command -->            
+                
             </div>
         </div>        
                       

@@ -16,8 +16,7 @@ export class FormComponent implements OnInit {
     orientation: ['', Validators.required], //Aquí me interesa que el valor por defecto sea un string vacío, ya que así aparecerá Escolleix tipo placeholder
     // commands: ['', Validators.required]
     commands: this.formBuilder.array( [//Es un array de form controls, NO es un array de arrays 
-      ['A'],
-      ['A']
+
     ], Validators.required) // Tiene que haber al menos una orden
   });
 
@@ -61,6 +60,11 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /* Método para borrar command creado */
+  deleteCommand(index: number) {
+    this.commandsArr.removeAt(index);
+  }  
+
   /* Método que lanzará el botón submit del formulario */
   startLanding() {
 
@@ -81,8 +85,10 @@ export class FormComponent implements OnInit {
         x: null,
         y: null,
         orientation: '',
-        commands: ''
+        commands: ['']
       });
+      this.newCommand.reset(''); //Reseteamos el campo newcommand
+      this.commandsArr.controls = []; //Reseteamos el array
 
       //Navegamos a la página de output 
     }
