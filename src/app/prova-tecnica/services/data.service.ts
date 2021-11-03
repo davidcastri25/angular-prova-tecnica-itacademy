@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Field, Rover} from '../interfaces/interfaces';
+import { Field, Rover, RoverPosition} from '../interfaces/interfaces';
 import { field, rover} from '../data/data';
 
 
@@ -11,7 +11,8 @@ import { field, rover} from '../data/data';
 export class DataService {
   /* Properties */
   formValues: any; //Aquí pongo any porque es el type que me aparece en el elemento que paso como parámetro
-  currentOrientation!: 'N' | 'S' | 'E' | 'W'; //Para controlar en todo momento la orientación del rover 
+  currentOrientation!: 'N' | 'S' | 'E' | 'W'; //Para controlar en todo momento la orientación del rover
+  currentPosition!: RoverPosition; 
   insideField: boolean = true; //Propiedad que controlará que no nos salgamos del campo (true: OK, false: nos hemos salido) 
 
   constructor() {}
@@ -20,6 +21,10 @@ export class DataService {
   passData(formValues: any) {
     this.formValues = formValues;
     this.currentOrientation = formValues.orientation;
+    this.currentPosition = {
+      x: this.formValues.x,
+      y: this.formValues.y
+    };
     this.insideField = true;
   }
 
@@ -94,7 +99,7 @@ export class DataService {
 
   /* Método con el algoritmo principal para mover el rover */
   mainAlgorithm() {
-     
+    console.log("Antes " + this.currentOrientation);     
     //Recorremos las commands
     rover.commands!.forEach(command => {
 
@@ -114,6 +119,8 @@ export class DataService {
           break;
       }      
     });
+
+    console.log("Después " + this.currentOrientation);
   }
 
   /* Método para orden de avanzar */
@@ -123,7 +130,20 @@ export class DataService {
 
   /* Método para orden girar izquierda */
   turnLeftCommand() {
-    console.log("izquierda")
+    switch(this.currentOrientation) {
+      case "N":
+        this.currentOrientation = "W";
+        break;
+      case "W":
+        this.currentOrientation = "S";
+        break;
+      case "S":
+        this.currentOrientation = "E";
+        break;
+      case "E":
+        this.currentOrientation = "N";
+        break;
+    }
   }
 
   /* Método para orden girar derecha */
