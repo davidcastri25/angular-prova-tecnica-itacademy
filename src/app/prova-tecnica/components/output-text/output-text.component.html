@@ -1,4 +1,39 @@
-<!-- Jumbotron -->
-<div class="jumbotron p-4 mb-4">                   
+<!-- 
+    Posibles outputs:
+    **Los commands no son correctos: validCommands = false
+    **Aterrizamos mal: insideField = false && hasLanded = false
+    **Aterrizamos bien pero nos acabamos saliendo = insideField = false && hasLanded = true
+    **Todo OK: insideField = true && hasLanded = true  
+ -->
+
+<!-- Output: commands no son correctos -->
+<div class="jumbotron-error p-4 mb-4"
+    *ngIf="!validCommands">
+    <!-- Info -->
+    <div>
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-secondary">Tornar a formulari</button>
+    </div>         
+</div>
+
+<!-- Output: aterrizamos mal -->
+<div class="jumbotron-error p-4 mb-4"
+    *ngIf="!insideField && !hasLanded">
+    BadLanding                   
           
+</div>
+
+<!-- Output: bien pero nos acabamos saliendo -->
+<div class="jumbotron-error p-4 mb-4"
+    *ngIf="!insideField && hasLanded">
+    HasFallen                   
+          
+</div>
+
+<!-- Output: todo ok -->
+<div class="jumbotron-ok p-4 mb-4"
+    *ngIf="insideField && hasLanded">                   
+    OK
 </div>

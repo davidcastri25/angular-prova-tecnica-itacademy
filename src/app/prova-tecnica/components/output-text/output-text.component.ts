@@ -12,6 +12,7 @@ export class OutputTextComponent implements OnInit {
   /* PROPERTIES */
   validCommands: boolean = true; //Para validar de nuevo que el array de órdenes tiene valores válidos
   insideField: boolean = true; //Para validar que estemos dentro del campo
+  hasLanded: boolean = false; //Indica si el rover ha aterrizado correctamente (por tanto, si las coordenadas iniciales hacen que aterrice en el campo o ya se sale desde un principio)
 
   constructor(private dataService: DataService) { }
 
@@ -19,6 +20,7 @@ export class OutputTextComponent implements OnInit {
     // 0 - Reseteamos propiedades
     this.validCommands = true;
     this.insideField = true;
+    this.hasLanded = false;
 
     // 1 - Validamos array de órdenes
     this.validCommands = this.dataService.validateAndSetCommands();
@@ -34,13 +36,12 @@ export class OutputTextComponent implements OnInit {
       
       //Solo seguiremos si this.insideField es true
       if (this.insideField) {
+        this.hasLanded = true; //Ha aterrizado
 
         //4- Iniciamos algoritmo (nos devolverà false si se ha salido del campo)
         this.insideField = this.dataService.mainAlgorithm();
       }       
     }
-    
-    //Sacamos el output correspondiente
   }
 
 }
