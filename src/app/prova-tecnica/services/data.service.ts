@@ -43,12 +43,15 @@ export class DataService {
     }
     rover.initialOrientation = this.formValues.orientation;
     rover.commands = this.formValues.commands;
-
-    console.log(field);
-    console.log(rover)
   }
 
-  /* SETTER: Método que comprobará que las órdenes introducidas sean válidas */
+  /* SETTER: Método que asigna al objeto rover la posición y orientación finales */
+  setFinalData() {
+    rover.finalOrientation = this.currentOrientation;
+    rover.finalPosition = this.currentPosition;
+  }
+
+  /* Método que comprobará que las órdenes introducidas sean válidas */
   validateAndSetCommands() {
     let commandsArr: string[] = this.formValues.commands;
     let validCommands = true;
@@ -98,34 +101,64 @@ export class DataService {
   }
 
   /* Método con el algoritmo principal para mover el rover */
-  mainAlgorithm() {
-    console.log("Antes " + this.currentOrientation);     
+  mainAlgorithm(): boolean {
+         
     //Recorremos las commands
     rover.commands!.forEach(command => {
-
-      //Por cada command haremos un switch y por cada case llamaré a otro método, para modularizar y que sea más fácil leer el código
-      switch(command) {
-        //Avanzar
-        case "A":
-          this.advanceCommand();
-          break;
-        //Girar a la izquierda
-        case "L":
-          this.turnLeftCommand();
-          break;
-        //Girar a la derecha
-        case "R":
-          this.turnRightCommand();
-          break;
-      }      
+      //Solamente seguiremos moviéndonos si this.insideField es true (this.advanceCommand() controla esto), a la que un comando nos saca del campo, ya no podemos seguir
+      if (this.insideField) {
+        //Por cada command haremos un switch y por cada case llamaré a otro método, para modularizar y que sea más fácil leer el código
+        switch(command) {
+          //Avanzar
+          case "A":
+            this.advanceCommand();
+            break;
+          //Girar a la izquierda
+          case "L":
+            this.turnLeftCommand();
+            break;
+          //Girar a la derecha
+          case "R":
+            this.turnRightCommand();
+            break;
+        }
+      }
+            
     });
 
-    console.log("Después " + this.currentOrientation);
+    //Actualizamos objeto rover
+    this.setFinalData();
+
+    //Devolvemos this.insideField para que el componente sepa si se ha salido o no
+    return this.insideField;
   }
 
   /* Método para orden de avanzar */
   advanceCommand() {
-    console.log("avanzo")
+    //Miraremos la orientación y en función de eso restaremos o sumaremos a la coordenada correspondiente. Además, hay que verificar después de la suma o resta, que aún estemos dentro del campo
+    let insideField!: boolean; // Guarda si estamos dentro (true) o no (false)
+
+    switch(this.currentOrientation) {
+      case "N":
+        this.currentPosition.y++;
+        insideField = this.roverInsideField(this.currentPosition.x, this.currentPosition.y);
+        break;
+      case "S":
+        this.currentPosition.y--;
+        insideField = this.roverInsideField(this.currentPosition.x, this.currentPosition.y);
+        break;
+      case "E":
+        this.currentPosition.x++;
+        insideField = this.roverInsideField(this.currentPosition.x, this.currentPosition.y);
+        break;
+      case "W":
+        this.currentPosition.x--;
+        insideField = this.roverInsideField(this.currentPosition.x, this.currentPosition.y);
+        break;  
+    }
+
+    //Actualizamos propiedad, ya que si es false tenemos que parar la ejecución del switch en mainAlgorithm para que el rover no se mueva más
+    this.insideField = insideField;
   }
 
   /* Método para orden girar izquierda */
