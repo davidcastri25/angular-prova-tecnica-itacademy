@@ -1,5 +1,5 @@
 <!-- Título -->
 <h2 class="text-center">Output</h2>
 
-<app-output-text></app-output-text>
-<app-output-graph></app-output-graph>
+<app-output-text (showGraph)="showGraphSignal()"></app-output-text>
+<app-output-graph *ngIf="showGraph"></app-output-graph>

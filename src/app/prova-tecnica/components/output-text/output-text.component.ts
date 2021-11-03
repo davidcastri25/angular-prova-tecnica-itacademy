@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data.service';
@@ -26,6 +26,9 @@ export class OutputTextComponent implements OnInit {
   commands!: string[];
   finalPosition!: RoverPosition;
   finalOrientation!: 'N' | 'S' | 'E' | 'W';
+
+  //Event Emitter que hará que se muestre el graph
+  @Output() showGraph = new EventEmitter();
 
   constructor(
     private dataService: DataService,
@@ -72,4 +75,8 @@ export class OutputTextComponent implements OnInit {
     this.router.navigate(["/form"]);
   }
 
+  /* Método que emitirá al padre que muestre Graph */
+  showGraphSignal() {
+    this.showGraph.emit();
+  }
 }

@@ -14,6 +14,8 @@ export class DataService {
   currentOrientation!: 'N' | 'S' | 'E' | 'W'; //Para controlar en todo momento la orientación del rover
   currentPosition!: RoverPosition; 
   insideField: boolean = true; //Propiedad que controlará que no nos salgamos del campo (true: OK, false: nos hemos salido) 
+  arrPositionsX: number[] = []; //Propiedad que guardará todas las coordenadas x que se van recorriendo para la representación gráfica
+  arrPositionsY: number[] = []; //Propiedad que guardará todas las coordenadas y que se van recorriendo para la representación gráfica
 
   constructor() {}
 
@@ -49,6 +51,16 @@ export class DataService {
   setFinalData() {
     rover.finalOrientation = this.currentOrientation;
     rover.finalPosition = this.currentPosition;
+  }
+
+  /* GETTER: Método que nos dará el array de todas las coordenadas x por las que ha pasado */
+  getCoordinatesX(): number[] {
+    return this.arrPositionsX;
+  }
+
+  /* GETTER: Método que nos dará el array de todas las coordenadas y por las que ha pasado */
+  getCoordinatesY(): number[] {
+    return this.arrPositionsY;
   }
 
   /* Método que comprobará que las órdenes introducidas sean válidas */
@@ -111,7 +123,7 @@ export class DataService {
         switch(command) {
           //Avanzar
           case "A":
-            this.advanceCommand();
+            this.advanceCommand();            
             break;
           //Girar a la izquierda
           case "L":
@@ -137,6 +149,8 @@ export class DataService {
   advanceCommand() {
     //Miraremos la orientación y en función de eso restaremos o sumaremos a la coordenada correspondiente. Además, hay que verificar después de la suma o resta, que aún estemos dentro del campo
     let insideField!: boolean; // Guarda si estamos dentro (true) o no (false)
+    let saveCurrentPositionX!: number; //Vamos a salvar la coordenada x actual
+    let saveCurrentPositionY!: number; //Vamos a salvar la coordenada y actual
 
     switch(this.currentOrientation) {
       case "N":
@@ -156,7 +170,13 @@ export class DataService {
         insideField = this.roverInsideField(this.currentPosition.x, this.currentPosition.y);
         break;  
     }
-
+    // debugger;
+    //Push de las nuevas coordenadas
+    saveCurrentPositionX = this.currentPosition.x;
+    saveCurrentPositionY = this.currentPosition.y;
+    this.arrPositionsX.push(saveCurrentPositionX);
+    this.arrPositionsY.push(saveCurrentPositionY);
+    // debugger;
     //Actualizamos propiedad, ya que si es false tenemos que parar la ejecución del switch en mainAlgorithm para que el rover no se mueva más
     this.insideField = insideField;
   }

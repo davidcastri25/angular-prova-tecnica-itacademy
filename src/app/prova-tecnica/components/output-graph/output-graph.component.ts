@@ -22,11 +22,13 @@ export class OutputGraphComponent implements OnInit {
   rowsArr!: number[];
   currentPositionX!: number;
   currentPositionY!: number;
+  coordinatesArrX: number[] = []; //Almacenará todas las coordenadas x después de la inicial
+  coordinatesArrY: number[] = []; //Almacenará todas las coordenadas y después de la inicial
 
   //Icono FontAwesome
   icon = faRobot;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     //Cargamos datos
@@ -34,12 +36,16 @@ export class OutputGraphComponent implements OnInit {
     this.fieldHeight = field.height;
     this.currentPositionX = rover.initialPosition.x;
     this.currentPositionY = rover.initialPosition.y;
+    this.coordinatesArrX = this.dataService.getCoordinatesX();
+    this.coordinatesArrY = this.dataService.getCoordinatesY();
 
     //Generamos arrays de filas y columnas
     this.columnsArr = this.generateArray(this.fieldWidth);
     this.rowsArr = this.generateArray(this.fieldHeight);
-    console.log(this.columnsArr)
-    console.log(this.rowsArr)
+    
+    //Recorremos array de posiciones y asignamos, es decir, movemos el rover
+    console.log (this.coordinatesArrX)
+    console.log (this.coordinatesArrY)
   }
 
   /* Método para crear array filas o columnas */
