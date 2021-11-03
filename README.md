@@ -21,3 +21,10 @@ La solución debe ser ejecutada en una única instrucción npm.
 
 # Node version
 16.3.0
+
+# Comando npm para ejecutar la aplicación
+Puedes ejecutar la aplicación mediante el siguiente comando:
+
+npm run iniciarapp
+
+El comando instalará las dependencias y hará el serve de la aplicación en tu navegador por defecto.
