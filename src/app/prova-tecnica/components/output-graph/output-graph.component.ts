@@ -20,6 +20,8 @@ export class OutputGraphComponent implements OnInit {
   fieldHeight!: number; //Alto genera filas
   columnsArr!: number[];
   rowsArr!: number[];
+  currentPositionX!: number;
+  currentPositionY!: number;
 
   //Icono FontAwesome
   icon = faRobot;
@@ -30,6 +32,8 @@ export class OutputGraphComponent implements OnInit {
     //Cargamos datos
     this.fieldWidth = field.width;
     this.fieldHeight = field.height;
+    this.currentPositionX = rover.initialPosition.x;
+    this.currentPositionY = rover.initialPosition.y;
 
     //Generamos arrays de filas y columnas
     this.columnsArr = this.generateArray(this.fieldWidth);

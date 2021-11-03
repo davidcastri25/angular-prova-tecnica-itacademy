@@ -1,11 +1,11 @@
 <!-- Fila -->
-<div *ngFor="let row of rowsArr.slice().reverse(); let i = index;"
+<div *ngFor="let row of rowsArr; let i = index;"
     class="d-flex flex-row border flex-grow-1">
 
     <!-- Columna -->
     <div *ngFor="let row of columnsArr; let j = index"
         class="flex-grow-1 p-2 text-center bg-light border border-2">
-        <fa-icon [icon]="icon" [ngClass]="{'transparent': (i != 0 && j == 0) || (i == 0 && j != 0) || (i != 0) || (j != 0)}"></fa-icon>
+        <fa-icon [icon]="icon" [ngClass]="{'transparent': (i != rowsArr.length - 1 - currentPositionY && j == currentPositionX) || (i == rowsArr.length - 1 - currentPositionY && j != currentPositionX) || (i != rowsArr.length - 1 - currentPositionY) || (j != currentPositionX)}"></fa-icon>
     </div>
     
 </div>
