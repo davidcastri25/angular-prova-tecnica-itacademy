@@ -148,6 +148,19 @@ export class DataService {
 
   /* Método para orden girar derecha */
   turnRightCommand() {
-    console.log("derecha")
+    switch(this.currentOrientation) {
+      case "N":
+        this.currentOrientation = "E";
+        break;
+      case "E":
+        this.currentOrientation = "S";
+        break;
+      case "S":
+        this.currentOrientation = "W";
+        break;
+      case "W":
+        this.currentOrientation = "N";
+        break;
+    }
   }
 }
