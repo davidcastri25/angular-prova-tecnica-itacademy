@@ -6,6 +6,7 @@ import { FormComponent } from './components/form/form.component';
 import { OutputComponent } from './components/output/output.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { OutputTextComponent } from './components/output-text/output-text.component';
+import { OutputGraphComponent } from './components/output-graph/output-graph.component';
 
 
 
@@ -14,7 +15,8 @@ import { OutputTextComponent } from './components/output-text/output-text.compon
   declarations: [
     FormComponent,
     OutputComponent,
-    OutputTextComponent
+    OutputTextComponent,
+    OutputGraphComponent
   ],
   exports: [
     FormComponent,
