@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data.service';
 
@@ -14,7 +15,9 @@ export class OutputTextComponent implements OnInit {
   insideField: boolean = true; //Para validar que estemos dentro del campo
   hasLanded: boolean = false; //Indica si el rover ha aterrizado correctamente (por tanto, si las coordenadas iniciales hacen que aterrice en el campo o ya se sale desde un principio)
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router) { }
 
   ngOnInit(): void {
     // 0 - Reseteamos propiedades
@@ -42,6 +45,11 @@ export class OutputTextComponent implements OnInit {
         this.insideField = this.dataService.mainAlgorithm();
       }       
     }
+  }
+
+  /* Método para navegar de vuelta al formulario */
+  navigateToForm() {
+    this.router.navigate(["/form"]);
   }
 
 }

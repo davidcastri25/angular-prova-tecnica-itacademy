@@ -11,29 +11,51 @@
     *ngIf="!validCommands">
     <!-- Info -->
     <div>
-
+        InvalidCommands
     </div>
-    <div>
-        <button type="button" class="btn btn-outline-secondary">Tornar a formulari</button>
+    <!-- Button -->
+    <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-outline-dark" (click)="navigateToForm()">Tornar a formulari</button>
     </div>         
 </div>
 
 <!-- Output: aterrizamos mal -->
 <div class="jumbotron-error p-4 mb-4"
     *ngIf="!insideField && !hasLanded">
-    BadLanding                   
+    <!-- Info -->
+    <div>
+        InvalidCommands
+    </div>
+    <!-- Button -->
+    <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-outline-dark" (click)="navigateToForm()">Tornar a formulari</button>
+    </div>                  
           
 </div>
 
 <!-- Output: bien pero nos acabamos saliendo -->
 <div class="jumbotron-error p-4 mb-4"
     *ngIf="!insideField && hasLanded">
-    HasFallen                   
+    <!-- Info -->
+    <div>
+        InvalidCommands
+    </div>
+    <!-- Button -->
+    <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-outline-dark" (click)="navigateToForm()">Tornar a formulari</button>
+    </div>                   
           
 </div>
 
 <!-- Output: todo ok -->
 <div class="jumbotron-ok p-4 mb-4"
     *ngIf="insideField && hasLanded">                   
-    OK
+    <!-- Info -->
+    <div>
+        InvalidCommands
+    </div>
+    <!-- Button -->
+    <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-outline-dark" (click)="navigateToForm()">Tornar a formulari</button>
+    </div>
 </div>
