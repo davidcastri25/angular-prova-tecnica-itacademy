@@ -31,8 +31,13 @@ export class OutputTextComponent implements OnInit {
 
       //3 - Validamos si hemos aterrizado dentro del campo o ya de entrada estamos fuera
       this.insideField = this.dataService.roverInsideField();
+      
+      //Solo seguiremos si this.insideField es true
+      if (this.insideField) {
 
-      //4- Iniciamos algoritmo
+        //4- Iniciamos algoritmo
+        this.dataService.mainAlgorithm();
+      }       
     }
     
     //Sacamos el output correspondiente

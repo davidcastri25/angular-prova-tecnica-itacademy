@@ -91,4 +91,43 @@ export class DataService {
 
     return (this.insideField);
   }
+
+  /* Método con el algoritmo principal para mover el rover */
+  mainAlgorithm() {
+     
+    //Recorremos las commands
+    rover.commands!.forEach(command => {
+
+      //Por cada command haremos un switch y por cada case llamaré a otro método, para modularizar y que sea más fácil leer el código
+      switch(command) {
+        //Avanzar
+        case "A":
+          this.advanceCommand();
+          break;
+        //Girar a la izquierda
+        case "L":
+          this.turnLeftCommand();
+          break;
+        //Girar a la derecha
+        case "R":
+          this.turnRightCommand();
+          break;
+      }      
+    });
+  }
+
+  /* Método para orden de avanzar */
+  advanceCommand() {
+    console.log("avanzo")
+  }
+
+  /* Método para orden girar izquierda */
+  turnLeftCommand() {
+    console.log("izquierda")
+  }
+
+  /* Método para orden girar derecha */
+  turnRightCommand() {
+    console.log("derecha")
+  }
 }
