@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data.service';
+import { field, rover} from '../../data/data';
+import { Field, RoverPosition } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-output-text',
@@ -11,9 +13,19 @@ import { DataService } from '../../services/data.service';
 
 export class OutputTextComponent implements OnInit {
   /* PROPERTIES */
+  //Propiedades de control
   validCommands: boolean = true; //Para validar de nuevo que el array de órdenes tiene valores válidos
   insideField: boolean = true; //Para validar que estemos dentro del campo
   hasLanded: boolean = false; //Indica si el rover ha aterrizado correctamente (por tanto, si las coordenadas iniciales hacen que aterrice en el campo o ya se sale desde un principio)
+
+  //Propiedades para el output
+  fieldSize!: Field;
+
+  initialPosition!: RoverPosition;
+  initialOrientation!: 'N' | 'S' | 'E' | 'W';
+  commands!: string[];
+  finalPosition!: RoverPosition;
+  finalOrientation!: 'N' | 'S' | 'E' | 'W';
 
   constructor(
     private dataService: DataService,
@@ -45,6 +57,14 @@ export class OutputTextComponent implements OnInit {
         this.insideField = this.dataService.mainAlgorithm();
       }       
     }
+
+    //Asignamos datos a las propiedades output desde los objetos importados field y rover
+    this.fieldSize = field;
+    this.initialOrientation = rover.initialOrientation;
+    this.initialPosition = rover.initialPosition;
+    this.commands = rover.commands!;
+    this.finalOrientation = rover.finalOrientation!;
+    this.finalPosition = rover.finalPosition!;
   }
 
   /* Método para navegar de vuelta al formulario */

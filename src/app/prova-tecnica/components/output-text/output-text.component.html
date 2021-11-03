@@ -11,7 +11,7 @@
     *ngIf="!validCommands">
     <!-- Info -->
     <div>
-        InvalidCommands
+        <p>Alguna de les ordres que s'ha introduït no és correcte. Només s'accepta Avançar (A), Girar a l'esquerra (L) i Girar a la dreta (R).</p>
     </div>
     <!-- Button -->
     <div class="d-flex justify-content-end mt-4">
@@ -24,7 +24,11 @@
     *ngIf="!insideField && !hasLanded">
     <!-- Info -->
     <div>
-        InvalidCommands
+        <p>Les coordenades inicials del Rover han fet que aterri fora del camp.</p>
+        <ul>
+            <li>Camp: {{fieldSize.width}} d'amplada, {{fieldSize.height}} d'alçada.</li>
+            <li>Coordenades inicials del Rover: ({{initialPosition.x}}, {{initialPosition.y}})</li>
+        </ul>
     </div>
     <!-- Button -->
     <div class="d-flex justify-content-end mt-4">
@@ -33,12 +37,19 @@
           
 </div>
 
-<!-- Output: bien pero nos acabamos saliendo -->
+<!-- Output: aterrizamos bien pero nos acabamos saliendo -->
 <div class="jumbotron-error p-4 mb-4"
     *ngIf="!insideField && hasLanded">
     <!-- Info -->
     <div>
-        InvalidCommands
+        <p>Les ordres introduïdes han fet que el rover es surti del camp. A continuació es mostra el punt on el rover s'ha sortit del camp (coordenades finals).</p>
+        <ul>
+            <li>Camp: {{fieldSize.width}} d'amplada, {{fieldSize.height}} d'alçada.</li>
+            <li>Coordenades inicials del Rover: ({{initialPosition.x}}, {{initialPosition.y}})</li>
+            <li>Orientació inicial del Rover: {{initialOrientation}}</li>
+            <li>Coordenades finals del Rover: ({{finalPosition.x}}, {{finalPosition.y}})</li>
+            <li>Orientació final del Rover: {{finalOrientation}}</li>
+        </ul>
     </div>
     <!-- Button -->
     <div class="d-flex justify-content-end mt-4">
@@ -52,7 +63,14 @@
     *ngIf="insideField && hasLanded">                   
     <!-- Info -->
     <div>
-        InvalidCommands
+        <p>A continuació es mostren les dades respectives a la informació introduïda.</p>
+        <ul>
+            <li>Camp: {{fieldSize.width}} d'amplada, {{fieldSize.height}} d'alçada.</li>
+            <li>Coordenades inicials del Rover: ({{initialPosition.x}}, {{initialPosition.y}})</li>
+            <li>Orientació inicial del Rover: {{initialOrientation}}</li>
+            <li>Coordenades finals del Rover: ({{finalPosition.x}}, {{finalPosition.y}})</li>
+            <li>Orientació final del Rover: {{finalOrientation}}</li>
+        </ul>
     </div>
     <!-- Button -->
     <div class="d-flex justify-content-end mt-4">
