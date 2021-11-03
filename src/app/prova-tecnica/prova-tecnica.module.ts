@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { FormComponent } from './components/form/form.component';
 import { OutputComponent } from './components/output/output.component';
 import { AppRoutingModule } from '../app-routing.module';
@@ -25,7 +27,8 @@ import { OutputGraphComponent } from './components/output-graph/output-graph.com
   imports: [
     CommonModule,
     AppRoutingModule,
-    ReactiveFormsModule //Para usar reactive forms
+    ReactiveFormsModule, //Para usar reactive forms    
+    FontAwesomeModule
   ]
 })
 export class ProvaTecnicaModule { }
