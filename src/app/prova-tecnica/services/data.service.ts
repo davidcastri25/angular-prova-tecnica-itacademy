@@ -28,6 +28,8 @@ export class DataService {
       y: this.formValues.y
     };
     this.insideField = true;
+    this.arrPositionsX = [];
+    this.arrPositionsY = [];
   }
 
   /* SETTER: Método que asigna los datos del formulario a los objetos JavaScript */

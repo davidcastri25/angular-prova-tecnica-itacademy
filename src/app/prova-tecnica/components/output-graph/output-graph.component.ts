@@ -44,8 +44,7 @@ export class OutputGraphComponent implements OnInit {
     this.rowsArr = this.generateArray(this.fieldHeight);
     
     //Recorremos array de posiciones y asignamos, es decir, movemos el rover
-    console.log (this.coordinatesArrX)
-    console.log (this.coordinatesArrY)
+    this.assignMovement();
   }
 
   /* Método para crear array filas o columnas */
@@ -58,4 +57,12 @@ export class OutputGraphComponent implements OnInit {
     return newArr;
   }
 
+  /* Método para asignar coordenadas */
+  assignMovement() {
+    
+    for (let i = 0; i < this.coordinatesArrX.length; i++) {
+      setTimeout(() => this.currentPositionX = this.coordinatesArrX[i], (1000 * (i + 1))); //Asignamos nueva coordenada x con delay
+      setTimeout(() => this.currentPositionY = this.coordinatesArrY[i], (1000 * (i + 1))); //Asignamos nueva coordenada y con delay            
+    }    
+  }
 }
